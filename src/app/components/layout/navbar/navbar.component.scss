@@ -1,0 +1,41 @@
+@import "../../../styles/colors";
+
+nav {
+    color: $white;
+    background-color: $cyan;
+
+    div.nav-wrapper {
+
+        a {
+            text-decoration: none;
+            text-shadow: 0px 1px 1px;
+            cursor: pointer;
+
+            &.brand-logo {
+                margin-left: 30px;
+                padding: 0 20px;
+            }
+
+            &:not([class=brand-logo]):hover {
+                color: $white;
+                background-color: $darkCyan;
+            }
+
+            #profile-image {
+                width: 50px;
+                vertical-align: middle;
+            }
+        }
+
+    }
+
+}
+
+[data-target="mobile-demo"] {
+    padding: 0 10px;
+}
+
+#profile-image {
+    background-color: white;
+    border-radius: 55px;
+}

@@ -1,0 +1,21 @@
+@import "../../styles/colors";
+
+.home-container {
+    background-color: $darkBlue;
+    height: 90vh;
+
+    .homeBtns {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 500px;
+        height: 80vh;
+        margin: 0 auto;
+
+        .btn {
+            width: 200px;
+            height: 100px;
+            z-index: 99;
+        }
+    }
+}

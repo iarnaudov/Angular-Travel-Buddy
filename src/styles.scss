@@ -1,0 +1,48 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./app/styles/colors";
+
+$darkWhite: #e1e1e1 !important;
+
+body {
+    margin: 0%;
+    background-color: $darkBlue;
+
+    .input-field {
+        .prefix {
+            color: $darkWhite;
+
+            &.active {
+                color: #26a69a !important;
+            }
+        }
+
+        label {
+            color: $darkWhite;
+        }
+       
+    }
+}
+
+body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .swal2-container.swal2-top-right {
+    top: 61px !important;
+}
+
+.select2-search__field {
+    height: 30px !important;
+}
+
+.select2-container {
+    width: 300px !important;
+}
+
+.padding {
+    padding: 10px;
+}
+
+.float-left {
+    float: left;
+}
+
+.form-margin-top {
+    margin-top: 100px;
+}

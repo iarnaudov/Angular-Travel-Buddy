@@ -14,7 +14,7 @@ declare var $: any;
 
 export class AuthService {
   private userAuth: any = {};
-  private toaster: any = new Toaster();
+  private toaster: Toaster = new Toaster();
 
   loggedInStatusUpdated: EventEmitter<string> = new EventEmitter();
 
@@ -40,14 +40,14 @@ export class AuthService {
     try {
       const loginCredentials: ILoginModel = loginForm.value;
       var auth = await firebase.auth().signInWithEmailAndPassword(loginCredentials.email, loginCredentials.password);
-      this.toaster.showSuccess("Good Good");
+      this.toaster.showSuccess("Successfully logged in");
       this.userAuth.id = auth.user.uid;
       var userInfo = await this.getUserProfileInfo();
       userInfo.id = auth.user.uid;
       this.setLoggedIn(userInfo);
       this.router.navigate(["/"]);
     } catch (error) {
-      Toast.fire({ title: 'Error', text: error.message, type: 'error' });
+      this.toaster.showError('Error', error.message);
       loginForm.resetForm();
     }
   }
@@ -58,7 +58,7 @@ export class AuthService {
 
   public logOut() {
     firebase.auth().signOut();
-    Toast.fire({ title: "Successfully logged out", type: 'success' });
+    this.toaster.showSuccess("Successfully logged out");
     var userInfo: any = {};
     this.setLoggedIn(userInfo);
     this.router.navigate(["/"]);
@@ -102,7 +102,7 @@ export class AuthService {
     return this.userAuth.id;
   }
 
-  
+
   public isAdmin() {
     return this.userAuth.id;
   }

@@ -9,7 +9,7 @@ import Utility from 'src/app/common/utilities';
   providedIn: 'root'
 })
 export class PostService {
-
+  private toaster: Toaster = new Toaster();
   constructor(private firestore: AngularFirestore, private router: Router) { }
 
   public addDriverPost(post: IDriverPost) {
@@ -17,10 +17,10 @@ export class PostService {
       .collection("driverPosts")
       .add(post)
       .then(() => {
-        Toast.fire({ title: 'Success', text: "Updated profile info", type: 'success' });
+        this.toaster.showSuccess('Success', "Successfully added post");
         this.router.navigate(["/driver/dashboard"]);
       }).catch(() => {
-        Toast.fire({ title: 'Error', text: "Please fill the form correctly", type: 'error' });
+        this.toaster.showError('Error', "Please fill the form correctly");
       })
   }
 
@@ -29,10 +29,10 @@ export class PostService {
       .collection("passengerPosts")
       .add(post)
       .then(() => {
-        Toast.fire({ title: 'Success', text: "Updated profile info", type: 'success' });
+        this.toaster.showSuccess('Success', "Successfully added post");
         this.router.navigate(["/passenger/dashboard"]);
       }).catch(() => {
-        Toast.fire({ title: 'Error', text: "Please fill the form correctly", type: 'error' });
+        this.toaster.showError('Error', "Please fill the form correctly");
       })
   }
 

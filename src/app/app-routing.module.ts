@@ -10,34 +10,38 @@ import { DriverDashboardComponent } from './components/driver/driver-dashboard/d
 import { PassengerDashboardComponent } from './components/passenger/passenger-dashboard/passenger-dashboard.component';
 import { DriverPostComponent } from './components/driver/driver-post/driver-post.component';
 import { PassengerPostComponent } from './components/passenger/passenger-post/passenger-post.component';
+import { ProfileResolver } from './resolvers/profile.resolver';
+import { UserGuard } from './guards/user.guard';
 
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full" },
-  { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
-  { path: "profile", component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: "driver",
+  { path: "login", component: LoginComponent, canActivate: [UserGuard] },
+  { path: "register", component: RegisterComponent, canActivate: [UserGuard] },
+  { path: "profile", component: ProfileComponent, resolve: { profileInfo: ProfileResolver }, canActivate: [AuthGuard] },
+  {
+    path: "driver",
     children: [
       {
-        path:  'post',
-        component:  DriverPostComponent,
+        path: 'post',
+        component: DriverPostComponent,
       },
       {
-        path:  'dashboard',
-        component:  DriverDashboardComponent,
+        path: 'dashboard',
+        component: DriverDashboardComponent,
         canActivate: [AuthGuard]
       },
     ],
-   },
-  { path: "passenger", 
+  },
+  {
+    path: "passenger",
     children: [
       {
-        path:  'post',
-        component:  PassengerPostComponent
+        path: 'post',
+        component: PassengerPostComponent
       },
       {
-        path:  'dashboard',
-        component:  PassengerDashboardComponent,
+        path: 'dashboard',
+        component: PassengerDashboardComponent,
         canActivate: [AuthGuard]
       },
     ],

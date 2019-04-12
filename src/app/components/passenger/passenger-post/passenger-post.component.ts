@@ -15,6 +15,7 @@ declare var M;
   styleUrls: ['./passenger-post.component.scss']
 })
 export class PassengerPostComponent implements OnInit {
+  private toaster: Toaster = new Toaster();
   private cities = [];
 
   constructor(private postService: PostService, private authService: AuthService) { }
@@ -37,7 +38,7 @@ export class PassengerPostComponent implements OnInit {
       let passengerPost: IPassengerPost = { passengerId: this.authService.getUserId(), from, to, date, time }
       this.postService.addPassengerPost(passengerPost);
     } else {
-      Toast.fire({ title: 'Error', text: "Please fill the form correctly", type: 'error' });
+      this.toaster.showError('Error', "Please fill the form correctly");
     }
   }
 

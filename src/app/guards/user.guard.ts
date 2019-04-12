@@ -3,10 +3,15 @@ import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree, CanActiva
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
+import Swal from 'sweetalert2';
+import { Toaster } from '../common/toaster';
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 
-export class AuthGuard implements CanActivate {
+export class UserGuard implements CanActivate {
+  private toaster: Toaster = new Toaster();
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -15,6 +20,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       this.router.navigate(['/']);
+      this.toaster.showInfo("You are already logged in.");
       return false;
     }
   }

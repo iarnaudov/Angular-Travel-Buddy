@@ -11,11 +11,23 @@ export class Toaster {
         });
     }
 
-    public showSuccess(title: string, message: string) {
+    public showSuccess(title: string, message?: string) {
         this.toaster.fire({ title, text: message, type: 'success' });
     }
 
-    public showError(title: string, message: string) {
+    public showInfo(title: string, message?: string) {
+        this.toaster.fire({ title, text: message, type: 'info' });
+    }
+
+    public showError(title: string, message?: string) {
         this.toaster.fire({ title, text: message, type: 'error' });
+    }
+
+    public showModalSuccess(title: string, message?: string) {
+        Swal.fire(title, message, "success");
+    }
+
+    public showModalError(title: string, message?: string) {
+        Swal.fire(title, message, "error");
     }
 }

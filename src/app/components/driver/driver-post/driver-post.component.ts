@@ -16,6 +16,7 @@ declare var M;
   styleUrls: ['./driver-post.component.scss']
 })
 export class DriverPostComponent implements OnInit {
+  private toaster: Toaster = new Toaster();
   private cities = [];
 
   constructor(private postService: PostService, private authService: AuthService) { }
@@ -42,7 +43,7 @@ export class DriverPostComponent implements OnInit {
       let driverPost: IDriverPost = { driverId: this.authService.getUserId(), from, to, date, time, price, seats }
       this.postService.addDriverPost(driverPost);
     } else {
-      Toast.fire({ title: 'Error', text: "Please fill the form correctly", type: 'error' });
+      this.toaster.showError('Error', "Please fill the form correctly");
     }
   }
 

@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { IErrorMessage, IRegisterModel } from "../../../common/interfaces";
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Toaster } from 'src/app/common/toaster';
 
 @Component({
   selector: 'app-register',
@@ -10,6 +11,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  private toaster: Toaster = new Toaster();
+
   private error: IErrorMessage = {
     showError: false,
     errorMessage: ""
@@ -19,9 +22,8 @@ export class RegisterComponent {
 
   public registerUser(registerForm: NgForm) {
     if (registerForm.invalid) {
-      Swal.fire("Please fill the form correctly", "", "error");
+      this.toaster.showError("Please fill the form correctly");
       console.log(registerForm.value);
-      
       return;
     }
 

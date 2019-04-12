@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { Toast } from "src/app/common/toaster";
+import { Toaster } from "src/app/common/toaster";
 import { IDriverPost } from "src/app/common/interfaces";
 import { AuthService } from 'src/app/services/auth.service';
 import Utility from 'src/app/common/utilities';

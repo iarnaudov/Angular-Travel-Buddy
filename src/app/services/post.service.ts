@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { IDriverPost, IPassengerPost } from "src/app/common/interfaces";
-import { Toast } from "src/app/common/toaster";
+import { Toaster } from "src/app/common/toaster";
 import Utility from 'src/app/common/utilities';
 
 @Injectable({

@@ -3,7 +3,7 @@ import { IErrorMessage, ILoginModel } from 'src/app/common/interfaces';
 import { AuthService } from 'src/app/services/auth.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { Toast } from "src/app/common/toaster";
+import { Toaster } from "src/app/common/toaster";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent {
 
   public loginUser(loginForm: NgForm) {
     if (loginForm.invalid) {
-      Toast.fire({ title: 'Error', text: "Please fill the form correctly", type: 'error' });
+      Toaster.fire({ title: 'Error', text: "Please fill the form correctly", type: 'error' });
       return;
     }
     this.authService.login(loginForm);

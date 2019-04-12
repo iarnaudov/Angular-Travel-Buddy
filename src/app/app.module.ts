@@ -14,7 +14,7 @@ import { FormsModule } from "@angular/forms";
 import { AuthService } from "./services/auth.service";
 
 // Guards
-import { AuthGuard } from "./resolvers/auth.guard";
+import { AuthGuard } from "./guards/auth.guard";
 
 // Components
 import { AppComponent } from './app.component';

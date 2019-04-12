@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
-import { Toast } from "src/app/common/toaster";
+import { Toaster } from "src/app/common/toaster";
 import { NgForm } from '@angular/forms';
 import Utility from 'src/app/common/utilities';
 import { IPassengerPost } from "src/app/common/interfaces";

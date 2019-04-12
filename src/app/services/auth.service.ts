@@ -6,7 +6,7 @@ import { ILoginModel, IRegisterModel } from '../common/interfaces';
 import Utility from 'src/app/common/utilities';
 import Swal from "sweetalert2";
 import { NgForm } from '@angular/forms';
-import { Toast } from "src/app/common/toaster";
+import { Toaster } from "src/app/common/toaster";
 
 declare var $: any;
 
@@ -14,6 +14,7 @@ declare var $: any;
 
 export class AuthService {
   private userAuth: any = {};
+  private toaster: any = new Toaster();
 
   loggedInStatusUpdated: EventEmitter<string> = new EventEmitter();
 
@@ -39,7 +40,7 @@ export class AuthService {
     try {
       const loginCredentials: ILoginModel = loginForm.value;
       var auth = await firebase.auth().signInWithEmailAndPassword(loginCredentials.email, loginCredentials.password);
-      Toast.fire({ title: 'Successfully logged in', type: 'success' });
+      this.toaster.showSuccess("Good Good");
       this.userAuth.id = auth.user.uid;
       var userInfo = await this.getUserProfileInfo();
       userInfo.id = auth.user.uid;
@@ -98,6 +99,11 @@ export class AuthService {
   }
 
   public getUserId() {
+    return this.userAuth.id;
+  }
+
+  
+  public isAdmin() {
     return this.userAuth.id;
   }
 

@@ -25,9 +25,13 @@ export class DriverPostComponent implements OnInit {
     this.cities = this.postService.getCities();
 
     //@ts-ignore
-    $('select').select2();
     $('#datepicker').datepicker({ format: "dd/mm/yyyy", autoClose: true });
     $('#timepicker').timepicker({ twelveHour: false, autoClose: true });
+    $('.form-container select').select2();
+    setTimeout(() => {
+      $('.form-container select').select2()
+      $(".fromToLabels").css("visibility", "visible");
+    }, 10);
   }
 
   public driverCreatePost(postForm: NgForm) {
@@ -40,7 +44,7 @@ export class DriverPostComponent implements OnInit {
 
     if (this.formIsValid(from, to, date, time, price, seats)) {
       debugger;
-      let driverPost: IDriverPost = { driverId: this.authService.getUserId(), from, to, date, time, price, seats }
+      let driverPost: IDriverPost = { authorId: this.authService.getUserId(), from, to, date, time, price, seats }
       this.postService.addDriverPost(driverPost);
     } else {
       this.toaster.showError('Error', "Please fill the form correctly");

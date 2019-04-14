@@ -6,12 +6,12 @@ import { RegisterComponent } from "./components/auth/register/register.component
 import { PageNotFoundComponent } from './components/layout/page-not-found/page-not-found.component';
 import { AuthGuard } from "./guards/auth.guard";
 import { ProfileComponent } from './components/auth/profile/profile.component';
-import { DriverDashboardComponent } from './components/driver/driver-dashboard/driver-dashboard.component';
-import { PassengerDashboardComponent } from './components/passenger/passenger-dashboard/passenger-dashboard.component';
-import { DriverPostComponent } from './components/driver/driver-post/driver-post.component';
-import { PassengerPostComponent } from './components/passenger/passenger-post/passenger-post.component';
+import { DriverPostComponent } from './components/post/driver-post/driver-post.component';
+import { PassengerPostComponent } from './components/post/passenger-post/passenger-post.component';
 import { ProfileResolver } from './resolvers/profile.resolver';
 import { UserGuard } from './guards/user.guard';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardResolver } from './resolvers/dashboard.resolver';
 
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full" },
@@ -19,30 +19,33 @@ const routes: Routes = [
   { path: "register", component: RegisterComponent, canActivate: [UserGuard] },
   { path: "profile", component: ProfileComponent, resolve: { profileInfo: ProfileResolver }, canActivate: [AuthGuard] },
   {
-    path: "driver",
+    path: "dashboard",
     children: [
       {
-        path: 'post',
-        component: DriverPostComponent,
+        path: 'driver',
+        component: DashboardComponent,
+        // canActivate: [AuthGuard],
+        resolve: { posts: DashboardResolver }
       },
       {
-        path: 'dashboard',
-        component: DriverDashboardComponent,
-        canActivate: [AuthGuard]
+        path: 'passenger',
+        component: DashboardComponent,
+        // canActivate: [AuthGuard],
+        resolve: { posts: DashboardResolver }
       },
     ],
   },
   {
-    path: "passenger",
+    path: "post",
     children: [
       {
-        path: 'post',
+        path: 'passenger',
         component: PassengerPostComponent
       },
       {
-        path: 'dashboard',
-        component: PassengerDashboardComponent,
-        canActivate: [AuthGuard]
+        path: 'driver',
+        component: DriverPostComponent,
+        // canActivate: [AuthGuard]
       },
     ],
   },

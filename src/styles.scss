@@ -30,6 +30,14 @@ body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .s
 .select2-search__field {
     height: 30px !important;
 }
+.fromToLabels {
+    visibility:hidden;
+}
+.browser-default {
+    height: 30px;
+    width: 300px;
+    display: inline-block !important;
+}
 
 .select2-container {
     width: 300px !important;
@@ -44,5 +52,15 @@ body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .s
 }
 
 .form-margin-top {
-    margin-top: 100px;
+    margin-top: 50px;
+}
+.bordered {
+    border: 1px solid white;
+}
+.vertical-align-center {
+    display: flex;
+    align-items: center;
+}
+.text-center {
+    text-align:center;
 }

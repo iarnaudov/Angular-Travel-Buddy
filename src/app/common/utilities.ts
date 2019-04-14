@@ -19,4 +19,8 @@ export default class Utility {
         var date = new Date(+dateParams[2], +dateParams[1], +dateParams[0]);
         return date.getTime();
     }
+
+    public static initializeScrollBar(selector: string) {
+        $(selector).mCustomScrollbar();
+    }
 }

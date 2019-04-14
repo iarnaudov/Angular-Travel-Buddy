@@ -18,7 +18,7 @@ export class PostService {
       .add(post)
       .then(() => {
         this.toaster.showSuccess('Success', "Successfully added post");
-        this.router.navigate(["/driver/dashboard"]);
+        this.router.navigate(["/dashboard/driver"]);
       }).catch(() => {
         this.toaster.showError('Error', "Please fill the form correctly");
       })
@@ -30,10 +30,15 @@ export class PostService {
       .add(post)
       .then(() => {
         this.toaster.showSuccess('Success', "Successfully added post");
-        this.router.navigate(["/passenger/dashboard"]);
+        this.router.navigate(["/dashboard/passenger"]);
       }).catch(() => {
         this.toaster.showError('Error', "Please fill the form correctly");
       })
+  }
+
+  public getPosts(route: string) {
+    const dbCollection = route.indexOf("driver") !== -1 ? "driverPosts" : "passengerPosts"
+    return this.firestore.collection(dbCollection).get();
   }
 
   public getCities() {

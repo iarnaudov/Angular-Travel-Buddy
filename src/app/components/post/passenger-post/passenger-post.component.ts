@@ -23,9 +23,13 @@ export class PassengerPostComponent implements OnInit {
   ngOnInit(): void {
     this.cities = this.postService.getCities();
 
-    ($('select') as any).select2();
     $('#datepicker').datepicker({ format: "dd/mm/yyyy", autoClose: true });
     $('#timepicker').timepicker({ twelveHour: false, autoClose: true });
+    ($('.form-container select') as any).select2();
+    setTimeout(() => {
+      $('.form-container select').select2(),
+        $(".fromToLabels").css("visibility", "visible");
+    }, 10);
   }
 
   public passengerCreatePost(postForm: NgForm) {
@@ -35,7 +39,7 @@ export class PassengerPostComponent implements OnInit {
     var time = $("#timepicker").val();
 
     if (this.formIsValid(from, to, date, time)) {
-      let passengerPost: IPassengerPost = { passengerId: this.authService.getUserId(), from, to, date, time }
+      let passengerPost: IPassengerPost = { authorId: this.authService.getUserId(), from, to, date, time }
       this.postService.addPassengerPost(passengerPost);
     } else {
       this.toaster.showError('Error', "Please fill the form correctly");

@@ -3,29 +3,30 @@
     <a class="brand-logo" [routerLink]="[ '/' ]">Travel Buddy</a>
     <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down">
-      <li><a [routerLink]="[ '/' ]">Home</a></li>
+      <li><a [routerLink]="[ '/' ]">Начало</a></li>
       <ng-container *ngIf="auth.isLoggedIn; else loggedOut">
+        <li><a [routerLink]="[ '/post/driver' ]">Нова Обява</a></li>
         <li><a [routerLink]="[ '/profile' ]">
             <img id="profile-image" [src]="auth.profilePicture" alt="" class="circle responsive-img">
           </a></li>
-        <li><a (click)="logOut()">Logout</a></li>
+        <li><a (click)="logOut()">Изход</a></li>
       </ng-container>
       <ng-template #loggedOut>
-        <li><a [routerLink]="[ '/login' ]">Login</a></li>
-        <li><a [routerLink]="[ '/register' ]">Register</a></li>
+        <li><a [routerLink]="[ '/login' ]">Вход</a></li>
+        <li><a [routerLink]="[ '/register' ]">Регистрация</a></li>
       </ng-template>
     </ul>
   </div>
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
-  <li><a [routerLink]="[ '/' ]">Home</a></li>
+  <li><a [routerLink]="[ '/' ]">Начало</a></li>
   <ng-container *ngIf="auth.isLoggedIn; else loggedOut">
-    <li><a [routerLink]="[ '/profile' ]">Profle</a></li>
-    <li><a (click)="logOut()">Logout</a></li>
+    <li><a [routerLink]="[ '/profile' ]">Профил</a></li>
+    <li><a (click)="logOut()">Изход</a></li>
   </ng-container>
   <ng-template #loggedOut>
-    <li><a [routerLink]="[ '/login' ]">Login</a></li>
-    <li><a [routerLink]="[ '/register' ]">Register</a></li>
+    <li><a [routerLink]="[ '/login' ]">Вход</a></li>
+    <li><a [routerLink]="[ '/register' ]">Регистрация</a></li>
   </ng-template>
 </ul>

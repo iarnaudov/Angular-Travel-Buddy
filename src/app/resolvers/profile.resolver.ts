@@ -9,6 +9,7 @@ export class ProfileResolver implements Resolve<any> {
     constructor(private authService: AuthService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        return this.authService.getUserProfileInfo();
+        const userId = this.authService.getUserId();
+        return this.authService.getUserProfileInfo(userId);
     }
 }

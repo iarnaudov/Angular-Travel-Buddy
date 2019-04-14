@@ -1,0 +1,23 @@
+.cardImage {
+    width: 50px;
+    background-color: white;
+    border-radius: 55px;
+    vertical-align: middle;
+}
+
+.postContainer {
+    height: 65px;
+    border-radius: 8px;
+}
+
+.cardsContainer {
+    height: 500px;
+}
+
+.medium-font {
+    font-size: 17px;
+}
+
+#searchPosts {
+    margin-left: 100px;
+}

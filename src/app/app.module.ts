@@ -25,10 +25,10 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { PageNotFoundComponent } from './components/layout/page-not-found/page-not-found.component';
 import { PageSvgComponent } from './components/layout/page-svg/page-svg.component';
 import { ProfileComponent } from './components/auth/profile/profile.component';
-import { DriverPostComponent } from './components/driver/driver-post/driver-post.component';
-import { DriverDashboardComponent } from './components/driver/driver-dashboard/driver-dashboard.component';
-import { PassengerPostComponent } from './components/passenger/passenger-post/passenger-post.component';
-import { PassengerDashboardComponent } from './components/passenger/passenger-dashboard/passenger-dashboard.component';
+import { DriverPostComponent } from './components/post/driver-post/driver-post.component';
+import { PassengerPostComponent } from './components/post/passenger-post/passenger-post.component';
+import { EpochToDateTimePipe } from './pipes/epochToDateTime.pipe';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -42,8 +42,8 @@ import { PassengerDashboardComponent } from './components/passenger/passenger-da
     ProfileComponent,
     DriverPostComponent,
     PassengerPostComponent,
-    PassengerDashboardComponent,
-    DriverDashboardComponent,
+    EpochToDateTimePipe,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

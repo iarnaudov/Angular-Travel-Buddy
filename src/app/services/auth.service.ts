@@ -42,7 +42,7 @@ export class AuthService {
       var auth = await firebase.auth().signInWithEmailAndPassword(loginCredentials.email, loginCredentials.password);
       this.toaster.showSuccess("Successfully logged in");
       this.userAuth.id = auth.user.uid;
-      var userInfo = await this.getUserProfileInfo();
+      var userInfo = await this.getUserProfileInfo(this.userAuth.id);
       userInfo.id = auth.user.uid;
       this.setLoggedIn(userInfo);
       this.router.navigate(["/"]);
@@ -62,6 +62,14 @@ export class AuthService {
     var userInfo: any = {};
     this.setLoggedIn(userInfo);
     this.router.navigate(["/"]);
+  }
+
+  public getAuthToken() {
+    firebase.auth().currentUser
+      .getIdToken()
+      .then(function (token) {
+        console.log(token);
+      });
   }
 
   public async updateUserProfile(profileForm: NgForm) {
@@ -86,10 +94,10 @@ export class AuthService {
     this.loggedInStatusUpdated.emit(userInfo);
   }
 
-  public getUserProfileInfo() {
+  public getUserProfileInfo(userId: string) {
     let def = $.Deferred();
     this.firestore.collection("users")
-      .doc(this.userAuth.id)
+      .doc(userId)
       .get()
       .subscribe((snapshot) => {
         def.resolve(snapshot.data());
@@ -101,7 +109,6 @@ export class AuthService {
   public getUserId() {
     return this.userAuth.id;
   }
-
 
   public isAdmin() {
     return this.userAuth.id;

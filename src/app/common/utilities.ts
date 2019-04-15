@@ -1,3 +1,5 @@
+declare var $: any;
+
 export default class Utility {
     public static firebaseSnapshotToArray = (snapshot) => {
         var arrayResult = [];

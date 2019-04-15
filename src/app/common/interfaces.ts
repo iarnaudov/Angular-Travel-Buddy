@@ -16,6 +16,7 @@ export interface IErrorMessage {
 }
 
 export interface IDriverPost {
+    id: string,
     authorId: string,
     from: string,
     to: string,
@@ -34,10 +35,22 @@ export interface IPassengerPost {
 }
 
 export interface IDriverPostCard {
-    profilePicture: string,
-    driverFullName: string,
+    id: string,
     to: string,
     from: string,
     date: string,
     time: string,
+    author: IUserProfile,
+}
+
+export interface IUserProfile {
+    id: string,
+    fullName: string,
+    carModel: string,
+    carPicture: string,
+    carRegNo: string,
+    carSmoking: string,
+    facebook: string,
+    mobile: string,
+    profilePicture: string,
 }

@@ -50,7 +50,19 @@ body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .s
 .float-left {
     float: left;
 }
-
+.margin-top-sm {
+    margin-top: 10px;
+}
+.margin-bottom-sm {
+    margin-bottom: 10px;
+}
+.bold-font {
+    font-weight: bold;
+}
+.modal-heading {
+    font-size: 20px;
+    color: #00949a;
+}
 .form-margin-top {
     margin-top: 50px;
 }
@@ -63,4 +75,16 @@ body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .s
 }
 .text-center {
     text-align:center;
+}
+
+.swal2-popup.swal2-modal.swal2-show {
+    background-color: $darkBlue !important;
+}
+
+.boder-radius {
+    border-radius: 15px;
+}
+
+.swal2-popup .swal2-styled.swal2-confirm {
+    background-color: #14939a !important;
 }

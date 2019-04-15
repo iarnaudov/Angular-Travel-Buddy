@@ -23,7 +23,12 @@ export class PassengerPostComponent implements OnInit {
   ngOnInit(): void {
     this.cities = this.postService.getCities();
 
-    $('#datepicker').datepicker({ format: "dd/mm/yyyy", autoClose: true });
+    $('#datepicker').datepicker({
+      format: "dd/mm/yyyy",
+      autoClose: true,
+      showClearBtn: true,
+      minDate: new Date(),
+    });
     $('#timepicker').timepicker({ twelveHour: false, autoClose: true });
     ($('.form-container select') as any).select2();
     setTimeout(() => {

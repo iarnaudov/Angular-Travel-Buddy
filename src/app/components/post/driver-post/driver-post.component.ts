@@ -25,7 +25,12 @@ export class DriverPostComponent implements OnInit {
     this.cities = this.postService.getCities();
 
     //@ts-ignore
-    $('#datepicker').datepicker({ format: "dd/mm/yyyy", autoClose: true });
+    $('#datepicker').datepicker({
+      format: "dd/mm/yyyy",
+      autoClose: true,
+      showClearBtn: true,
+      minDate: new Date(),
+    });
     $('#timepicker').timepicker({ twelveHour: false, autoClose: true });
     $('.form-container select').select2();
     setTimeout(() => {

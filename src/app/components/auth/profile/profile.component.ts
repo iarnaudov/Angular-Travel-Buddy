@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
       this.toaster.showModalError("Error Occurred");
     } else {
       await this.authService.updateUserProfile(profileForm);
-      this.toaster.showModalSuccess("Error Occurred");
+      this.toaster.showModalSuccess("Profile updated");
     }
   }
 }

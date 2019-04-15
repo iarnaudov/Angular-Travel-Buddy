@@ -1,13 +1,14 @@
 <div class="row medium-font">
   <h5 id="dashboardHeading" class="blue-text text-lighten-2 text-center">Хора, предлагащи превоз</h5>
   <div class="col s10 m8 l6 offset-l1 form-margin-top cardsContainer" data-mcs-theme="dark">
-    <div class="row bordered vertical-align-center postContainer" *ngFor="let post of viewPosts">
+    <h6 *ngIf="viewPosts.length === 0" class="white-text">Няма активни обяви отговарящи на вашето търсене</h6>
+    <div class="row bordered vertical-align-center postContainer" [id]="post.id" *ngFor="let post of viewPosts">
       <div class="col s3 m2 l1 white-text">
-        <img [src]="post.profilePicture" class="cardImage">
+        <img [src]="post.author.profilePicture" class="cardImage">
       </div>
       <div class="col m7 l7 white-text">
         <div>
-          <div class="col s12 l6 white-text">{{ post.driverFullName }}</div>
+          <div class="col s12 l6 white-text">{{ post.author.fullName }}</div>
           <div class="col s12 l6 white-text">
             {{ post.from }} > {{ post.to }}
           </div>

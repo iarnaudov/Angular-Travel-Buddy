@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { forEach } from '@angular/router/src/utils/collection';
 import { PostService } from 'src/app/services/post.service';
 
+declare var $: JQuery;
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,6 +17,7 @@ import { PostService } from 'src/app/services/post.service';
 export class DashboardComponent implements OnInit {
   private initialPosts: IDriverPostCard[] = [];
   private viewPosts: IDriverPostCard[] = [];
+
   private cities = [];
 
   constructor(
@@ -45,15 +48,34 @@ export class DashboardComponent implements OnInit {
       $("#dashboardHeading").text("Хора, търсещи превоз");
     }
 
-    $("#searchPosts").click(() => {
-      const fromCity = $("#fromCity").val() as string;
-      const toCity = $("#toCity").val();
-      const datePicker = $("#datepicker").val();
-      this.viewPosts = this.initialPosts.filter(function (post) {
-        return post.from === fromCity;
+    $("#searchPosts").click(() => this.filterResults());
+  }
+
+  private filterResults() {
+    const fromCity = $("#fromCity").val() as string;
+    const toCity = $("#toCity").val();
+    const datePicker = $("#datepicker").val();
+
+    this.viewPosts = this.initialPosts.filter((post) => {
+      let condition: boolean = true;
+
+      if (fromCity === "0" && toCity === "0" && datePicker === "") {
+        return post;
       }
-      );
-    });
+
+      if (fromCity !== "0") {
+        condition = post.from === fromCity;
+      }
+      if (toCity !== "0") {
+        condition = condition && post.to === toCity;
+      }
+      if (datePicker !== "") {
+        condition = condition && post.date === datePicker;
+      }
+
+      return condition;;
+    }
+    );
   }
 
   private async mapViewModel(posts: IDriverPost[]) {

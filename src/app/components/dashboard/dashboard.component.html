@@ -22,14 +22,14 @@
     <div class="input-field col s12">
       <span class="white-text padding">От</span>
       <select class="browser-default" name="fromCity" id="fromCity">
-        <option selected disabled>Избери град на тръгване</option>
+        <option selected value="0">Избери град на тръгване</option>
         <option *ngFor="let city of cities">{{city}}</option>
       </select>
     </div>
     <div class="input-field col s12">
       <span class="white-text padding col s1">До</span>
       <select class="browser-default col s11" name="toCity" id="toCity">
-        <option selected disabled>Избери град на пристигане</option>
+        <option selected value="0">Избери град на пристигане</option>
         <option *ngFor="let city of cities">{{city}}</option>
       </select>
     </div>

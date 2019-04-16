@@ -6,6 +6,7 @@ import { Toaster } from "src/app/common/toaster";
 import { IDriverPost } from "src/app/common/interfaces";
 import { AuthService } from 'src/app/services/auth.service';
 import Utility from 'src/app/common/utilities';
+import { ActivatedRoute } from '@angular/router';
 
 declare var $;
 declare var M;
@@ -19,11 +20,18 @@ export class DriverPostComponent implements OnInit {
   private toaster: Toaster = new Toaster();
   private cities = [];
 
-  constructor(private postService: PostService, private authService: AuthService) { }
+  constructor(
+    private postService: PostService,
+    private authService: AuthService,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
     this.cities = this.postService.getCities();
-
+    let dbPosts: IDriverPost;
+    if (this.route.data['value'].post) {
+      dbPosts = this.route.data['value'].post.data();
+    }
     //@ts-ignore
     $('#datepicker').datepicker({
       format: "dd/mm/yyyy",
@@ -48,7 +56,6 @@ export class DriverPostComponent implements OnInit {
     var seats = $("#freeSeats").val() as string;
 
     if (this.formIsValid(from, to, date, time, price, seats)) {
-      debugger;
       let driverPost: IDriverPost = { authorId: this.authService.getUserId(), from, to, date, time, price, seats }
       this.postService.addDriverPost(driverPost);
     } else {

@@ -12,6 +12,8 @@ import { ProfileResolver } from './resolvers/profile.resolver';
 import { UserGuard } from './guards/user.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardResolver } from './resolvers/dashboard.resolver';
+import { PersonalComponent } from './components/post/personal/personal.component';
+import { PostResolver } from './resolvers/post.resolver';
 
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full" },
@@ -43,8 +45,24 @@ const routes: Routes = [
         component: PassengerPostComponent
       },
       {
+        path: 'passenger/:id',
+        component: PassengerPostComponent,
+        resolve: { post: PostResolver }
+      },
+      {
         path: 'driver',
         component: DriverPostComponent,
+        // canActivate: [AuthGuard]
+      },
+      {
+        path: 'driver/:id',
+        component: DriverPostComponent,
+        // canActivate: [AuthGuard],
+        resolve: { post: PostResolver }
+      },
+      {
+        path: 'personal',
+        component: PersonalComponent,
         // canActivate: [AuthGuard]
       },
     ],

@@ -6,6 +6,7 @@
       <li><a [routerLink]="[ '/' ]">Начало</a></li>
       <ng-container *ngIf="auth.isLoggedIn; else loggedOut">
         <li><a [routerLink]="[ '/post/driver' ]">Нова Обява</a></li>
+        <li><a [routerLink]="[ '/post/personal' ]">Моите обяви</a></li>
         <li><a [routerLink]="[ '/profile' ]">
             <img id="profile-image" [src]="auth.profilePicture" alt="" class="circle responsive-img">
           </a></li>

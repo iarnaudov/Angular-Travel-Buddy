@@ -41,6 +41,12 @@ export class PostService {
     return this.firestore.collection(dbCollection).get();
   }
 
+  public getPost(route: string) {
+    const dbCollection = route.indexOf("driver") !== -1 ? "driverPosts" : "passengerPosts"
+    const postId = route.substring(route.lastIndexOf("/") + 1);
+    return this.firestore.collection(dbCollection).doc(postId).get();
+  }
+
   public getCities() {
     return [
       "Айтос",

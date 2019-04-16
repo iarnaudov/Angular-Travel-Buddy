@@ -63,44 +63,12 @@ export class DashboardComponent implements OnInit {
   private openPostModal(e) {
     const id: string = $(e.target).closest(".postContainer").attr("id");
     const postInfo: IDriverPostCard = this.viewPosts.filter((post: IDriverPostCard) => post.id === id)[0];
-    console.log(postInfo);
-    const smokingIcon = postInfo.author.carSmoking === "true" ? "smoking_rooms" : "smoke_free";
-    let htmlContent = `<div>
-                        <div class="margin-bottom-sm bold-font modal-heading">Информация за шофьора</div>
-                        <div class="row">
-                          <div class="col s6">
-                            <img src="${postInfo.author.profilePicture}" class="boder-radius" width="100" />
-                          </div>
-                          <div class="col s6">
-                              <div class="margin-top-sm white-text">${postInfo.author.fullName}</div>
-                              <div class="margin-top-sm white-text">${postInfo.author.mobile}</div>
-                              <div class="margin-top-sm white-text">${postInfo.author.facebook}</div>
-                          </div>
-                        </div>
-                        <div class="margin-bottom-sm bold-font modal-heading">Информация за пътуването</div>
-                        <div class="row">
-                          <div class="col s12">
-                            <div class="margin-top-sm white-text">${postInfo.from} > ${postInfo.to}</div>
-                            <div class="margin-top-sm white-text">${postInfo.time}, ${postInfo.date}</div>
-                          </div>
-                        </div>
-                        <div class="margin-bottom-sm bold-font modal-heading">Информация за автомобила</div>
-                        <div class="row">
-                          <div class="col s12 l6">
-                            <img src="${postInfo.author.carPicture}" class="boder-radius" width="180" />
-                          </div>
-                          <div class="col s12 l6">
-                            <div class="row">
-                              <div class="col s12 margin-top-sm white-text">${postInfo.author.carModel}</div>
-                              <div class="col s12 margin-top-sm white-text">${postInfo.author.carRegNo}</div>
-                              <div class="col s12 margin-top-sm white-text"><i class="small material-icons">${smokingIcon}</i></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>`
+    const dashboardIsDriverMode: boolean = location.href.indexOf("driver") !== -1;
+    const htmlContent = dashboardIsDriverMode ? this.getDriverHtmlModalContent(postInfo) : this.getPassengerHtmlModalContent(postInfo)
 
     Swal.fire({
-      html: htmlContent
+      html: htmlContent,
+      focusConfirm: false,
     })
   }
 
@@ -140,6 +108,8 @@ export class DashboardComponent implements OnInit {
         to: post.to,
         date: this.getDateFromEpoch(post.date),
         time: post.time,
+        price: post.price,
+        seats: post.seats,
         author: {
           id: userInfoDict[post.authorId].id,
           fullName: userInfoDict[post.authorId].username,
@@ -173,4 +143,69 @@ export class DashboardComponent implements OnInit {
     return userInfoDict;
   }
 
+  private getDriverHtmlModalContent(postInfo: IDriverPostCard) {
+    const smokingIcon = postInfo.author.carSmoking === "true" ? "smoking_rooms" : "smoke_free";
+    const facebookLink = postInfo.author.facebook.indexOf("http") !== 0 ? `https://www.facebook.com/${postInfo.author.facebook}` : postInfo.author.facebook;
+    const facebookUsername = facebookLink.substring(facebookLink.lastIndexOf("/") + 1);
+    let htmlContent = `<div>
+    <div class="margin-bottom-sm bold-font modal-heading">Информация за шофьора</div>
+      <div class="row">
+        <div class="col s6">
+          <img src="${postInfo.author.profilePicture}" class="boder-radius" width="100" />
+        </div>
+        <div class="col s6">
+            <div class="margin-top-sm white-text">${postInfo.author.fullName}</div>
+            <div class="margin-top-sm white-text"><i class="fas fa-mobile-alt"></i> ${postInfo.author.mobile}</div>
+            <div class="margin-top-sm white-text"><a class="white-text" href="${facebookLink}" target="_blank"><i class="fab fa-facebook-square"></i> ${facebookUsername}</a></div>
+        </div>
+      </div>
+      <div class="margin-bottom-sm bold-font modal-heading">Информация за пътуването</div>
+      <div class="row">
+        <div class="col s12">
+          <div class="margin-top-sm white-text destination-text">${postInfo.from} > ${postInfo.to}</div>
+        </div>
+        <div class="col s6">
+          <div class="margin-top-sm white-text">Час: ${postInfo.time}</div>
+          <div class="margin-top-sm white-text">Дата: ${postInfo.date}</div>
+        </div>
+        <div class="col s6">
+          <div class="margin-top-sm white-text">Цена: ${postInfo.price} лв.</div>
+          <div class="margin-top-sm white-text">Свободни места: ${postInfo.seats}</div>
+        </div>
+      </div>
+      <div class="margin-bottom-sm bold-font modal-heading">Информация за автомобила</div>
+      <div class="row">
+        <div class="col s12 l6">
+          <img src="${postInfo.author.carPicture}" class="boder-radius" width="180" />
+        </div>
+        <div class="col s12 l6">
+          <div class="row">
+            <div class="col s12 margin-top-sm white-text">${postInfo.author.carModel}</div>
+            <div class="col s12 margin-top-sm white-text">${postInfo.author.carRegNo}</div>
+            <div class="col s12 margin-top-sm white-text"><i class="small material-icons">${smokingIcon}</i></div>
+          </div>
+        </div>
+      </div>
+    </div>`
+    return htmlContent
+  }
+
+  private getPassengerHtmlModalContent(postInfo: IDriverPostCard) {
+    const facebookLink = postInfo.author.facebook.indexOf("http") !== 0 ? `https://www.facebook.com/${postInfo.author.facebook}` : postInfo.author.facebook;
+    const facebookUsername = facebookLink.substring(facebookLink.lastIndexOf("/") + 1);
+    let htmlContent = `<div>
+    <div class="margin-bottom-md bold-font modal-heading">Информация за пътника</div>
+      <div class="row">
+        <div class="col s6">
+          <img src="${postInfo.author.profilePicture}" class="boder-radius" width="100" />
+        </div>
+        <div class="col s6">
+            <div class="margin-top-sm white-text">${postInfo.author.fullName}</div>
+            <div class="margin-top-sm white-text"><i class="fas fa-mobile-alt"></i> ${postInfo.author.mobile}</div>
+            <div class="margin-top-sm white-text"><a class="white-text" href="${facebookLink}" target="_blank"><i class="fab fa-facebook-square"></i> ${facebookUsername}</a></div>
+        </div>
+      </div>
+    </div>`
+    return htmlContent
+  }
 }

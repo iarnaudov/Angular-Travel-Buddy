@@ -8,6 +8,7 @@
 .postContainer {
     height: 65px;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 .cardsContainer {

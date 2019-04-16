@@ -16,7 +16,7 @@ export interface IErrorMessage {
 }
 
 export interface IDriverPost {
-    id: string,
+    id?: string,
     authorId: string,
     from: string,
     to: string,
@@ -40,6 +40,8 @@ export interface IDriverPostCard {
     from: string,
     date: string,
     time: string,
+    price: string,
+    seats: string,
     author: IUserProfile,
 }
 

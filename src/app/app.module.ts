@@ -29,6 +29,7 @@ import { DriverPostComponent } from './components/post/driver-post/driver-post.c
 import { PassengerPostComponent } from './components/post/passenger-post/passenger-post.component';
 import { EpochToDateTimePipe } from './pipes/epochToDateTime.pipe';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PersonalComponent } from './components/post/personal/personal.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     PassengerPostComponent,
     EpochToDateTimePipe,
     DashboardComponent,
+    PersonalComponent,
   ],
   imports: [
     BrowserModule,

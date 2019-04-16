@@ -14,6 +14,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardResolver } from './resolvers/dashboard.resolver';
 import { PersonalComponent } from './components/post/personal/personal.component';
 import { PostResolver } from './resolvers/post.resolver';
+import { PersonalPostsResolver } from './resolvers/personalPosts.resolver';
 
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full" },
@@ -63,7 +64,8 @@ const routes: Routes = [
       {
         path: 'personal',
         component: PersonalComponent,
-        // canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        resolve: { posts: PersonalPostsResolver }
       },
     ],
   },

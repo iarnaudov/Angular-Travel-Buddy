@@ -25,4 +25,8 @@ export default class Utility {
     public static initializeScrollBar(selector: string) {
         $(selector).mCustomScrollbar();
     }
+
+    public static getDateFromEpoch(epochDateTime: number) {
+        return new Date(epochDateTime).toLocaleDateString('en-GB');
+    }
 }

@@ -47,6 +47,10 @@ export class PostService {
     return this.firestore.collection(dbCollection).doc(postId).get();
   }
 
+  public getPostsByAuthorId(authorId: string) {
+    return this.firestore.collection("driverPosts").get();
+  }
+
   public getCities() {
     return [
       "Айтос",

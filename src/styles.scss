@@ -83,6 +83,9 @@ body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .s
     font-size: 20px;
     font-weight: 400;
 }
+.pointer {
+    cursor: pointer;
+}
 .swal2-popup.swal2-modal.swal2-show {
     background-color: $darkBlue !important;
 }

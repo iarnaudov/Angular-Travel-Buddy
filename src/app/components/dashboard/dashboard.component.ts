@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit {
         id: post.id,
         from: post.from,
         to: post.to,
-        date: this.getDateFromEpoch(post.date),
+        date: Utility.getDateFromEpoch(post.date),
         time: post.time,
         price: post.price,
         seats: post.seats,
@@ -127,9 +127,7 @@ export class DashboardComponent implements OnInit {
     return viewModels;
   }
 
-  private getDateFromEpoch(epochDateTime: number) {
-    return new Date(epochDateTime).toLocaleDateString('en-GB');
-  }
+
 
   private async getUserInfos(dbPosts) {
     const userInfoDict = {};

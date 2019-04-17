@@ -3,6 +3,8 @@ import { IDriverPost, IDriverPostCard } from 'src/app/common/interfaces';
 import Utility from 'src/app/common/utilities';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 
+declare var $: any;
+
 @Component({
   selector: 'app-personal',
   templateUrl: './personal.component.html',
@@ -15,7 +17,11 @@ export class PersonalComponent implements OnInit {
 
   ngOnInit() {
     const dbPosts: IDriverPostCard[] = Utility.firebaseSnapshotToArray(this.route.data['value'].posts.docs);
-    console.log(dbPosts);
+    for (const post of dbPosts) {
+      post.date = new Date(post.date).toString();
+      post.driving = post.price ? "fa-facebook-square" : "fa-facebook-square";
+    }
+
     this.viewPosts = dbPosts;
 
     setTimeout(() => {

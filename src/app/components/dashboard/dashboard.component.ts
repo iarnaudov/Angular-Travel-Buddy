@@ -17,7 +17,7 @@ declare var $;
 
 export class DashboardComponent implements OnInit {
   private initialPosts: IDriverPostCard[] = [];
-  private viewPosts: IDriverPostCard[] = [];
+  public viewPosts: IDriverPostCard[] = [];
 
   private cities = [];
 

@@ -27,13 +27,11 @@ const routes: Routes = [
       {
         path: 'driver',
         component: DashboardComponent,
-        // canActivate: [AuthGuard],
         resolve: { posts: DashboardResolver }
       },
       {
         path: 'passenger',
         component: DashboardComponent,
-        // canActivate: [AuthGuard],
         resolve: { posts: DashboardResolver }
       },
     ],
@@ -48,17 +46,17 @@ const routes: Routes = [
       {
         path: 'passenger/:id',
         component: PassengerPostComponent,
+        canActivate: [AuthGuard],
         resolve: { post: PostResolver }
       },
       {
         path: 'driver',
         component: DriverPostComponent,
-        // canActivate: [AuthGuard]
       },
       {
         path: 'driver/:id',
         component: DriverPostComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
         resolve: { post: PostResolver }
       },
       {

@@ -89,6 +89,9 @@ body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .s
 .swal2-popup.swal2-modal.swal2-show {
     background-color: $darkBlue !important;
 }
+.swal2-title {
+    color: white !important;
+}
 
 .boder-radius {
     border-radius: 15px;

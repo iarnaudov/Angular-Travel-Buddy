@@ -75,12 +75,12 @@ export class DashboardComponent implements OnInit {
   private filterResults() {
     const fromCity = $("#fromCity").val() as string;
     const toCity = $("#toCity").val();
-    const datePicker = $("#datepicker").val();
+    const datePicker = Utility.dateToEpochTime($("#datepicker").val() || 0);
 
     this.viewPosts = this.initialPosts.filter((post) => {
       let condition: boolean = true;
 
-      if (fromCity === "0" && toCity === "0" && datePicker === "") {
+      if (fromCity === "0" && toCity === "0" && datePicker === 0) {
         return post;
       }
 
@@ -90,8 +90,10 @@ export class DashboardComponent implements OnInit {
       if (toCity !== "0") {
         condition = condition && post.to === toCity;
       }
-      if (datePicker !== "") {
-        condition = condition && post.date === datePicker;
+      if (datePicker) {
+        condition = condition && new Date(post.date).toLocaleDateString() === new Date(datePicker).toLocaleDateString();
+        console.log(new Date(post.date).toLocaleDateString() === new Date(datePicker).toLocaleDateString());
+        console.log(new Date(post.date).toLocaleDateString() + " " + " " + new Date(datePicker).toLocaleDateString())
       }
 
       return condition;;
@@ -106,7 +108,7 @@ export class DashboardComponent implements OnInit {
         id: post.id,
         from: post.from,
         to: post.to,
-        date: Utility.getDateFromEpoch(post.date),
+        date: post.date,
         time: post.time,
         price: post.price,
         seats: post.seats,

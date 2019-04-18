@@ -1,17 +1,16 @@
 <div class="row medium-font">
   <h5 id="dashboardHeading" class="blue-text text-lighten-2 text-center">Моите обяви</h5>
-  <div class="col s10 m8 l4 offset-l4 form-margin-top cardsContainer" data-mcs-theme="dark">
+  <div class="form-margin-top cardsContainer" style="margin: 0 auto" data-mcs-theme="dark">
     <h6 *ngIf="viewPosts.length === 0" class="white-text">Няма създадени от вас обяви</h6>
-    <div class="row bordered vertical-align-center pointer myPostContainer" [id]="post.id" *ngFor="let post of viewPosts">
-      <div class="col l2 white-text">
-          <i class="fab {{ post.driving }}"></i>
-      </div>
-      <div class="col l4 white-text">
+    <div class="row bordered vertical-align-center pointer myPostContainer" [id]="post.id"
+      *ngFor="let post of viewPosts">
+      <div class="col l6 white-text">
         {{ post.from }} > {{ post.to }}
       </div>
-      <div class="col l4 offset-l2 white-text">
+      <div class="col l5 offset-l1 white-text">
         {{ post.time }}ч. | {{ post.date | date : 'dd/MM/yyyy' }}
       </div>
     </div>
   </div>
 </div>
+<app-page-svg></app-page-svg>

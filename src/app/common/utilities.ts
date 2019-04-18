@@ -17,8 +17,12 @@ export default class Utility {
     }
 
     public static dateToEpochTime(dateString: string) {
+        if (!dateString) {
+            return null;
+        }
+
         var dateParams = dateString.split("/");
-        var date = new Date(+dateParams[2], +dateParams[1], +dateParams[0]);
+        var date = new Date(+dateParams[2], +dateParams[1] - 1, +dateParams[0]);
         return date.getTime();
     }
 

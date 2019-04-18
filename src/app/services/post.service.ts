@@ -36,6 +36,32 @@ export class PostService {
       })
   }
 
+  public editDriverPost(post: IDriverPost) {
+    this.firestore
+      .collection("driverPosts")
+      .doc(post.id)
+      .update(post)
+      .then(() => {
+        this.toaster.showSuccess('Success', "Successfully edited post");
+        this.router.navigate(["/post/personal"]);
+      }).catch(() => {
+        this.toaster.showError('Error', "Please fill the form correctly");
+      })
+  }
+
+  public deleteDriverPost(postId: string) {
+    this.firestore
+      .collection("driverPosts")
+      .doc(postId)
+      .delete()
+      .then(() => {
+        this.toaster.showSuccess('Success', "Successfully deleted post");
+        this.router.navigate(["/post/personal"]);
+      }).catch(() => {
+        this.toaster.showError('Error', "Please fill the form correctly");
+      })
+  }
+
   public getPosts(route: string) {
     const dbCollection = route.indexOf("driver") !== -1 ? "driverPosts" : "passengerPosts"
     return this.firestore.collection(dbCollection).get();

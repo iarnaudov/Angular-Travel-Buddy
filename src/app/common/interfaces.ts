@@ -38,7 +38,7 @@ export interface IDriverPostCard {
     id: string,
     to: string,
     from: string,
-    date: string,
+    date: number,
     time: string,
     price: string,
     seats: string,

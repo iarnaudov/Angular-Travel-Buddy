@@ -17,20 +17,15 @@ export class PersonalComponent implements OnInit {
 
   ngOnInit() {
     const dbPosts: IDriverPostCard[] = Utility.firebaseSnapshotToArray(this.route.data['value'].posts.docs);
-    for (const post of dbPosts) {
-      post.date = new Date(post.date).toString();
-      post.driving = post.price ? "fa-facebook-square" : "fa-facebook-square";
-    }
-
     this.viewPosts = dbPosts;
 
     setTimeout(() => {
-      $(".postContainer").click((e) => this.redirectToPostEditPage(e));
+      $(".myPostContainer").click((e) => this.redirectToPostEditPage(e));
     }, 200);
   }
 
   private redirectToPostEditPage(e) {
-    const id: string = $(e.target).closest(".postContainer").attr("id");
+    const id: string = $(e.target).closest(".myPostContainer").attr("id");
     const postInfo: IDriverPostCard = this.viewPosts.filter((post: IDriverPostCard) => post.id === id)[0];
     this.router.navigate([`/post/driver/${id}`]);
   }

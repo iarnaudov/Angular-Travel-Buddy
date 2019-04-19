@@ -38,6 +38,7 @@ const routes: Routes = [
   },
   {
     path: "post",
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'passenger',
@@ -46,7 +47,6 @@ const routes: Routes = [
       {
         path: 'passenger/:id',
         component: PassengerPostComponent,
-        canActivate: [AuthGuard],
         resolve: { post: PostResolver }
       },
       {
@@ -56,13 +56,11 @@ const routes: Routes = [
       {
         path: 'driver/:id',
         component: DriverPostComponent,
-        canActivate: [AuthGuard],
         resolve: { post: PostResolver }
       },
       {
         path: 'personal',
         component: PersonalComponent,
-        canActivate: [AuthGuard],
         resolve: { posts: PersonalPostsResolver }
       },
     ],

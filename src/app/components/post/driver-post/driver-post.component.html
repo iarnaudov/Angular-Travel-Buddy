@@ -8,16 +8,20 @@
       <h5 class="blue-text text-lighten-2" style="margin-bottom: 35px;">Създай обява</h5>
     </ng-template>
     <!-- ================== -->
-    <p>
-      <label>
-        <input name="group1" type="radio" checked />
-        <span>Предлагам превоз</span>
-      </label>
-      <label [routerLink]="[ '/post/passenger' ]" style="margin-left: 50px;">
-        <input name="group1" type="radio" />
-        <span>Търся си превоз</span>
-      </label>
-    </p>
+    <ng-container *ngIf="postIsInEditMode; else elseChoice">
+    </ng-container>
+    <ng-template #elseChoice>
+      <p>
+        <label>
+          <input name="group1" type="radio" checked />
+          <span>Предлагам превоз</span>
+        </label>
+        <label [routerLink]="[ '/post/passenger' ]" style="margin-left: 50px;">
+          <input name="group1" type="radio" />
+          <span>Търся си превоз</span>
+        </label>
+      </p>
+    </ng-template>
     <!-- ================== -->
     <div class="fromToLabels">
       <div class="input-field col s10 m6">

@@ -147,6 +147,7 @@ export class DashboardComponent implements OnInit {
     const smokingIcon = postInfo.author.carSmoking === "true" ? "smoking_rooms" : "smoke_free";
     const facebookLink = postInfo.author.facebook.indexOf("http") !== 0 ? `https://www.facebook.com/${postInfo.author.facebook}` : postInfo.author.facebook;
     const facebookUsername = facebookLink.substring(facebookLink.lastIndexOf("/") + 1);
+    const postDate = Utility.getDateFromEpoch(postInfo.date);
     let htmlContent = `<div>
     <div class="margin-bottom-sm bold-font modal-heading">Информация за шофьора</div>
       <div class="row">

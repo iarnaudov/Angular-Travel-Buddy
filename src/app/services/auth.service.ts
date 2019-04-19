@@ -10,7 +10,9 @@ import { Toaster } from "src/app/common/toaster";
 
 declare var $: any;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 
 export class AuthService {
   private userAuth: any = {};

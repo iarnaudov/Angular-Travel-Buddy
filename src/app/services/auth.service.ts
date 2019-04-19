@@ -26,7 +26,7 @@ export class AuthService {
     try {
       const newUser: IRegisterModel = registerForm.value;
       var response = await firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password);
-      await this.firestore.collection("users").doc(response.user.uid).set({ username: newUser.username, isAdmin: false })
+      await this.firestore.collection("users").doc(response.user.uid).set({ username: newUser.username, isAdmin: false, isBlocked: false })
       Swal.fire("Success", "Successfully registered user", "success").then(() => {
         var userInfo: any = {};
         userInfo.id = response.user.uid;
@@ -97,6 +97,9 @@ export class AuthService {
   }
 
   public getUserProfileInfo(userId: string) {
+    if (!userId) {
+      this.router.navigate(["/login"]);
+    }
     let def = $.Deferred();
     this.firestore.collection("users")
       .doc(userId)
@@ -114,6 +117,18 @@ export class AuthService {
 
   public isAdmin() {
     return this.userAuth.id;
+  }
+
+  public getAllSiteUsers() {
+    return firebase.firestore().collection("users").get();
+  }
+
+  public blockUser(userId: string, blockResult: boolean) {
+    firebase.firestore().collection("users").doc(userId).get().then((response) => {
+      var userObj = response.data();
+      userObj.isBlocked = blockResult
+      firebase.firestore().collection("users").doc(userId).set(userObj);
+    })
   }
 
   private setLoggedIn(userInfo: any) {

@@ -56,3 +56,10 @@ export interface IUserProfile {
     mobile: string,
     profilePicture: string,
 }
+
+export interface IUserManagement {
+    id: string,
+    fullName: string,
+    isBlocked: boolean;
+    isAdmin: boolean;
+}

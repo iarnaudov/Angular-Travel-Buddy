@@ -15,6 +15,8 @@ import { DashboardResolver } from './resolvers/dashboard.resolver';
 import { PersonalComponent } from './components/post/personal/personal.component';
 import { PostResolver } from './resolvers/post.resolver';
 import { PersonalPostsResolver } from './resolvers/personalPosts.resolver';
+import { UsersManagementComponent } from './components/users-management/users-management.component';
+import { UserManagerResolver } from './resolvers/users-manager.resolver';
 
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full" },
@@ -65,6 +67,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: "admin/users", component: UsersManagementComponent, resolve: { users: UserManagerResolver } },
   { path: "**", component: PageNotFoundComponent },
 ];
 

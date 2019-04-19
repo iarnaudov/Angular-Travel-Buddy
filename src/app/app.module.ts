@@ -30,6 +30,7 @@ import { PassengerPostComponent } from './components/post/passenger-post/passeng
 import { EpochToDateTimePipe } from './pipes/epochToDateTime.pipe';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PersonalComponent } from './components/post/personal/personal.component';
+import { UsersManagementComponent } from './components/users-management/users-management.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PersonalComponent } from './components/post/personal/personal.component
     EpochToDateTimePipe,
     DashboardComponent,
     PersonalComponent,
+    UsersManagementComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,7 @@ declare var $;
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.scss']
 })
 
 export class DashboardComponent implements OnInit {
@@ -29,14 +29,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.cities = this.postService.getCities();
-    const dbPosts: IDriverPost[] = Utility.firebaseSnapshotToArray(this.route.data['value'].posts.docs);
+    const dbPosts: IDriverPost[] = this.orderByDate(Utility.firebaseSnapshotToArray(this.route.data['value'].posts.docs));
     this.mapViewModel(dbPosts).then((result: IDriverPostCard[]) => {
       this.viewPosts = result;
       this.initialPosts = result;
-      setTimeout(() => {
-        $(".postContainer").click((e) => this.openPostModal(e));
-      }, 200);
-
+      this.applyPostsOnClickEvent();
     });
 
     this.arrangeFields();
@@ -44,7 +41,7 @@ export class DashboardComponent implements OnInit {
 
   private arrangeFields() {
     Utility.initializeScrollBar(".cardsContainer");
-    $('.form-margin-top select').select2();
+
     $('#datepicker').datepicker({
       format: "dd/mm/yyyy",
       autoClose: true,
@@ -58,6 +55,16 @@ export class DashboardComponent implements OnInit {
     }
 
     $("#searchPosts").click(() => this.filterResults());
+
+    setTimeout(() => {
+      $('.form-margin-top select').select2();
+    }, 300);
+  }
+
+  private orderByDate(dbPosts: IDriverPost[]) {
+    return dbPosts.sort(function (a, b) {
+      return b.date - a.date;
+    });
   }
 
   private openPostModal(e) {
@@ -91,14 +98,19 @@ export class DashboardComponent implements OnInit {
         condition = condition && post.to === toCity;
       }
       if (datePicker) {
-        condition = condition && new Date(post.date).toLocaleDateString() === new Date(datePicker).toLocaleDateString();
-        console.log(new Date(post.date).toLocaleDateString() === new Date(datePicker).toLocaleDateString());
-        console.log(new Date(post.date).toLocaleDateString() + " " + " " + new Date(datePicker).toLocaleDateString())
+        condition = condition && new Date(Utility.dateToEpochTime(post.date.toString())).toLocaleDateString() === new Date(datePicker).toLocaleDateString();
       }
 
       return condition;;
     }
     );
+    this.applyPostsOnClickEvent();
+  }
+
+  private applyPostsOnClickEvent() {
+    setTimeout(() => {
+      $(".postContainer").click((e) => this.openPostModal(e));
+    }, 500);
   }
 
   private async mapViewModel(posts: IDriverPost[]) {
@@ -108,7 +120,7 @@ export class DashboardComponent implements OnInit {
         id: post.id,
         from: post.from,
         to: post.to,
-        date: post.date,
+        date: Utility.getDateFromEpoch(post.date),
         time: post.time,
         price: post.price,
         seats: post.seats,
@@ -120,7 +132,7 @@ export class DashboardComponent implements OnInit {
           profilePicture: userInfoDict[post.authorId].profilePicture,
           carModel: userInfoDict[post.authorId].carModel,
           carPicture: userInfoDict[post.authorId].carPicture,
-          carRegNo: userInfoDict[post.authorId].carRegNo,
+          carRegNo: userInfoDict[post.authorId].carRegNo.toUpperCase(),
           carSmoking: userInfoDict[post.authorId].carSmoking,
         }
       }
@@ -147,7 +159,6 @@ export class DashboardComponent implements OnInit {
     const smokingIcon = postInfo.author.carSmoking === "true" ? "smoking_rooms" : "smoke_free";
     const facebookLink = postInfo.author.facebook.indexOf("http") !== 0 ? `https://www.facebook.com/${postInfo.author.facebook}` : postInfo.author.facebook;
     const facebookUsername = facebookLink.substring(facebookLink.lastIndexOf("/") + 1);
-    const postDate = Utility.getDateFromEpoch(postInfo.date);
     let htmlContent = `<div>
     <div class="margin-bottom-sm bold-font modal-heading">Информация за шофьора</div>
       <div class="row">
@@ -157,7 +168,7 @@ export class DashboardComponent implements OnInit {
         <div class="col s6">
             <div class="margin-top-sm white-text">${postInfo.author.fullName}</div>
             <div class="margin-top-sm white-text"><i class="fas fa-mobile-alt"></i> ${postInfo.author.mobile}</div>
-            <div class="margin-top-sm white-text"><a class="white-text" href="${facebookLink}" target="_blank"><i class="fab fa-facebook-square"></i> ${facebookUsername}</a></div>
+            <div class="margin-top-sm white-text"><a class="white-text pointer" href="${facebookLink}" target="_blank"><i class="fab fa-facebook-square"></i> ${facebookUsername}</a></div>
         </div>
       </div>
       <div class="margin-bottom-sm bold-font modal-heading">Информация за пътуването</div>

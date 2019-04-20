@@ -19,6 +19,7 @@ export class NavbarComponent {
     this.authService.loggedInStatusUpdated.subscribe((auth) => {
       this.auth.isLoggedIn = !!auth.id ? true : false;
       this.auth.profilePicture = auth.profilePicture || "https://www.mobelti.com.tr/wp-content/uploads/2017/11/man-avatar.png";
+      this.auth.isAdmin = auth.isAdmin;
     })
   }
 

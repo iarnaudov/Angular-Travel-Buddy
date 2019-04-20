@@ -23,10 +23,6 @@ body {
     }
 }
 
-body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .swal2-container.swal2-top-right {
-    top: 61px !important;
-}
-
 .select2-search__field {
     height: 30px !important;
 }
@@ -86,17 +82,26 @@ body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .s
 .pointer {
     cursor: pointer;
 }
+.boder-radius {
+    border-radius: 15px;
+}
+
+// Sweet alert 2 overridings
+body.swal2-toast-shown .swal2-container.swal2-top-end, body.swal2-toast-shown .swal2-container.swal2-top-right {
+    top: 61px !important;
+}
 .swal2-popup.swal2-modal.swal2-show {
     background-color: $darkBlue !important;
 }
 .swal2-title {
     color: #57a7a1 !important;
 }
-
-.boder-radius {
-    border-radius: 15px;
+.swal2-content  {
+    color: #57a7a1 !important;
 }
-
 .swal2-popup .swal2-styled.swal2-confirm {
     background-color: #14939a !important;
+}
+.swal2-success-fix, .swal2-success-circular-line-left, .swal2-success-circular-line-right {
+    background-color: transparent !important;
 }

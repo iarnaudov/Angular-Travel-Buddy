@@ -2,7 +2,8 @@
   <h5 id="dashboardHeading" class="blue-text text-lighten-2 text-center">Хора, предлагащи превоз</h5>
   <div class="col s10 m8 l6 offset-l1 form-margin-top cardsContainer" data-mcs-theme="dark">
     <h6 *ngIf="viewPosts.length === 0" class="white-text">Няма активни обяви отговарящи на вашето търсене</h6>
-    <div class="row bordered vertical-align-center postContainer" [id]="post.id" *ngFor="let post of viewPosts">
+    <div appHighlightOnHover class="row bordered vertical-align-center postContainer" [id]="post.id"
+      *ngFor="let post of viewPosts">
       <div class="col s3 m2 l1 white-text">
         <img [src]="post.author.profilePicture" class="cardImage">
       </div>
@@ -15,7 +16,7 @@
         </div>
       </div>
       <div class="col m4 white-text">
-        {{ post.time }}ч. | {{ post.date | date: 'dd/MM/yyyy' }}
+        {{ post.time }}ч. | {{ post.date }}
       </div>
     </div>
   </div>

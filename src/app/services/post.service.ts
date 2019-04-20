@@ -16,9 +16,12 @@ export class PostService {
     this.firestore
       .collection("driverPosts")
       .add(post)
-      .then(() => {
+      .then((response) => {
+        post.id = response.id;
+        this.firestore.collection("driverPosts").doc(response.id).update(post);
+        console.log(response);
         this.toaster.showSuccess('Success', "Successfully added post");
-        this.router.navigate(["/dashboard/driver"]);
+        this.router.navigate(["/dashboard/passenger"]);
       }).catch(() => {
         this.toaster.showError('Error', "Please fill the form correctly");
       })

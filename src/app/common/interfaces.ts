@@ -38,11 +38,12 @@ export interface IDriverPostCard {
     id: string,
     to: string,
     from: string,
-    date: number,
+    date: number | string,
     time: string,
     price: string,
     seats: string,
     author: IUserProfile,
+    authorId?: string,
 }
 
 export interface IUserProfile {

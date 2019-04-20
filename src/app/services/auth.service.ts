@@ -80,10 +80,10 @@ export class AuthService {
       id: this.userAuth.id,
       username: form.username,
       isAdmin: false,
-      carModel: form.carModel,
-      carPicture: form.carPicture,
-      carRegNo: form.carRegNo,
-      carSmoking: form.carSmoking,
+      carModel: form.carModel || "",
+      carPicture: form.carPicture || "",
+      carRegNo: form.carRegNo || "",
+      carSmoking: form.carSmoking || "",
       facebook: form.facebook,
       mobile: form.mobile,
       profilePicture: form.profilePicture,
@@ -115,8 +115,12 @@ export class AuthService {
     return this.userAuth.id;
   }
 
+  public isBlocked() {
+    return this.userAuth.isBlocked;
+  }
+
   public isAdmin() {
-    return this.userAuth.id;
+    return this.userAuth.isAdmin;
   }
 
   public getAllSiteUsers() {
@@ -135,7 +139,8 @@ export class AuthService {
     this.userAuth.id = userInfo.id;
     this.userAuth.username = userInfo.username;
     this.userAuth.profilePicture = userInfo.profilePicture;
-    this.userAuth.username = userInfo.username;
+    this.userAuth.isBlocked = userInfo.isBlocked;
+    this.userAuth.isAdmin = userInfo.isAdmin;
     this.loggedInStatusUpdated.emit(this.userAuth);
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IDriverPost, IDriverPostCard } from 'src/app/common/interfaces';
 import Utility from 'src/app/common/utilities';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 declare var $: any;
 
@@ -13,11 +14,13 @@ declare var $: any;
 export class PersonalComponent implements OnInit {
   private viewPosts: IDriverPostCard[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     const dbPosts: IDriverPostCard[] = Utility.firebaseSnapshotToArray(this.route.data['value'].posts.docs);
-    this.viewPosts = dbPosts;
+    this.viewPosts = dbPosts.filter((p) => {
+      return p.authorId === this.authService.getUserId();
+    });
 
     setTimeout(() => {
       $(".myPostContainer").click((e) => this.redirectToPostEditPage(e));

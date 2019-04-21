@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./users-management.component.scss']
 })
 export class UsersManagementComponent implements OnInit {
-  private usersArray: IUserManagement[] = [];
+  public usersArray: IUserManagement[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService) { }
 

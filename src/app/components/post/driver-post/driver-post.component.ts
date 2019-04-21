@@ -18,11 +18,11 @@ declare var M;
 })
 export class DriverPostComponent implements OnInit {
   private toaster: Toaster = new Toaster();
-  private cities = [];
+  public cities = [];
   // @ts-ignore
-  private dbPost: IDriverPost = {};
-  private postIsInEditMode: boolean = false;
-  private postId: string = "";
+  public dbPost: IDriverPost = {};
+  public postIsInEditMode: boolean = false;
+  public postId: string = "";
 
   constructor(
     private postService: PostService,

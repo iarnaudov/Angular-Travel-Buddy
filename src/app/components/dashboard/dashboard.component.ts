@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   private initialPosts: IDriverPostCard[] = [];
   public viewPosts: IDriverPostCard[] = [];
 
-  private cities = [];
+  public cities = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -156,7 +156,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private getDriverHtmlModalContent(postInfo: IDriverPostCard) {
-    const smokingIcon = postInfo.author.carSmoking === "true" ? "smoking_rooms" : "smoke_free";
+    const smokingIcon = postInfo.author.carSmoking === true ? "smoking_rooms" : "smoke_free";
     const facebookLink = postInfo.author.facebook.indexOf("http") !== 0 ? `https://www.facebook.com/${postInfo.author.facebook}` : postInfo.author.facebook;
     const facebookUsername = facebookLink.substring(facebookLink.lastIndexOf("/") + 1);
     let htmlContent = `<div>

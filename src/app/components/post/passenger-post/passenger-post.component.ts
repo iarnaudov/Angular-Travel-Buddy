@@ -16,7 +16,7 @@ declare var M;
 })
 export class PassengerPostComponent implements OnInit {
   private toaster: Toaster = new Toaster();
-  private cities = [];
+  public cities = [];
 
   constructor(private postService: PostService, private authService: AuthService) { }
 

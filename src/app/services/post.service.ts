@@ -21,7 +21,7 @@ export class PostService {
         this.firestore.collection("driverPosts").doc(response.id).update(post);
         console.log(response);
         this.toaster.showSuccess('Success', "Successfully added post");
-        this.router.navigate(["/dashboard/passenger"]);
+        this.router.navigate(["/"]);
       }).catch(() => {
         this.toaster.showError('Error', "Please fill the form correctly");
       })
@@ -33,7 +33,7 @@ export class PostService {
       .add(post)
       .then(() => {
         this.toaster.showSuccess('Success', "Successfully added post");
-        this.router.navigate(["/dashboard/passenger"]);
+        this.router.navigate(["/"]);
       }).catch(() => {
         this.toaster.showError('Error', "Please fill the form correctly");
       })

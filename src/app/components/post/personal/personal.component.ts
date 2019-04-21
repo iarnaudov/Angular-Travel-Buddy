@@ -12,7 +12,7 @@ declare var $: any;
   styleUrls: ['./personal.component.scss']
 })
 export class PersonalComponent implements OnInit {
-  private viewPosts: IDriverPostCard[] = [];
+  public viewPosts: IDriverPostCard[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService) { }
 

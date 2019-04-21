@@ -52,7 +52,7 @@ export interface IUserProfile {
     carModel: string,
     carPicture: string,
     carRegNo: string,
-    carSmoking: string,
+    carSmoking: string | boolean,
     facebook: string,
     mobile: string,
     profilePicture: string,

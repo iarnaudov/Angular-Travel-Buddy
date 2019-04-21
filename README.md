@@ -2,6 +2,8 @@
 Want to find friends and save money?
 Use this appliaction to find buddies to travel with. 
 
+![soft28237798-08b42c74-6950-11e7-8c9d-76344b16e9d5](https://imgur.com/50yVhhl)
+
 * Build with Angular.
 * Firebase cloud storage, authentication and hosting
 * HTML5 Features
